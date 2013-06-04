@@ -1,0 +1,108 @@
+/*
+Title: index.html and additem.html style sheet
+Name: Rolando Velasco
+Term: VFW 1303
+Project Part 4
+*/
+
+body {
+	background-color: #868B97;
+	color: #000000;
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial, Helvetica;
+}
+
+h1 {
+	background-color: #25282E;
+	color: #868B97;
+	margin: 0px;
+	padding: 5px;
+	text-align: center;
+}
+
+a:hover {
+	color: green;
+}
+
+a:active {
+	color: red;
+}
+
+div {
+	margin: 0px;
+	padding: 0px 10px;
+}
+
+form {
+	margin: 0px;
+	padding: 10px 10px;
+}
+
+legend {
+	font-weight: bold;
+}
+
+label {
+	display: block;
+}
+
+ul {
+	margin: 0px;
+	padding: 0px 20px;
+}
+
+ul#errors {
+	font-weight: bold;
+	color: #B00000;
+}
+
+li {
+	list-style-type: none;
+}
+
+.addli {
+	margin-bottom: 1em;
+}
+
+input#goalheadline {
+	width: 100%;
+}
+
+input#size {
+	width: 100%;
+}
+
+input#savegoal {
+	font-size: 1em;
+	margin: 10px 0px;
+}
+
+label#labelgoalcomplete {
+	display: inline;
+	margin-right: 0.5em;
+}
+
+textarea {
+	width: 100%;
+}
+
+.goallinks {
+	margin-right: 0.5em;
+}
+
+span#required {
+	font-size: 0.8em;
+}
+
+a#clear {
+	margin-left: 1em;
+	margin-right: 0.5em;
+}
+
+ul.goalinfo {
+	margin-bottom: 1em;
+	padding: 0em 1em 1em 1em;
+	border: 1px solid #25282E;
+	background-color: #BABFCB;
+}

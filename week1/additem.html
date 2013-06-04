@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- Name: Rolando Velasco -->
+<!-- Term: VFW 1303 -->
+<!-- Project Part 4 -->
+
+<html>
+	<head>
+		<!-- Meta tags -->
+		<meta charset="utf-8" />
+		<meta name="description" content="My Goals To-Do List App" />
+		<meta name="keyword" content="html5, mobile development, visual frameworks, goals list" />
+		<meta name="robots" content="index, follow" />
+		<meta name="viewport" content="user-scalable=no, width=device-width" />
+		<meta name="HandHeldFriendly" content="True" />
+		<meta name="MobileOptimized" content="320" />
+
+		<!-- Link to CSS file -->
+		<link href="css/styles.css" rel="stylesheet" />
+		
+		<!-- Title -->
+		<title>My First Web App: Goals To-Do List</title>
+	</head>
+	
+	<body>
+		<!-- Header -->
+		<header>
+			<hgroup>
+				<!-- Name of app -->
+				<h1>Goals To-Do List</h1>
+			</hgroup>
+		</header>
+		
+		<!-- Form -->
+		<form action="#" method="post" id="goalform" >
+		
+			<!-- First, set up the fieldset and legend -->
+			<fieldset>
+				<legend>Add a New Goal</legend>
+				<span id="required">* required field</span>
+				<ul id="errors"></ul>
+				<!-- Display the elements of the form as an unordered list -->
+				<ul>
+					
+					<!-- Text element: Goal Headline -->
+					<li class="addli"><label for="goalheadline">*Goal:</label><input type="text" id="goalheadline" /></li>
+				
+					<!-- Select combobox: Type of Goal -->
+					<li id="selecttype" class="addli">
+						<label for="goaltype">*Type of Goal:</label>
+					</li>
+					
+					<!-- Date element: Goal deadline -->
+					<li class="addli"><label for="deadline">Complete By:</label><input type="date" id="deadline" /></li>
+					
+					<!-- Range element: Goal importance -->
+					<li class="addli"><label for="size">From 1-10 (1 being the smallest), how big is this goal?</label><input type="range" min="1" max="10" id="size" /></li>
+					
+					<!-- Text area element: Notes about the goal -->
+					<li class="addli"><label for="details">Details:</label><textarea id="details"></textarea></li>
+					 
+					<!-- Checkbox element: Goal Completed -->
+					<li><label for="goalcomplete" id="labelgoalcomplete">Goal Achieved:</label><input type="checkbox" value="Goal Achieved" id="goalcomplete" /></li>
+				</ul>
+				
+				<!-- Hidden data to submit -->
+				<input type="hidden" value="newgoal" />
+			</fieldset>
+			
+			<!-- Save the goal -->
+			<input type="submit" value="Save Goal" id="savegoal" />
+		</form>
+		
+<!--		<div id="displaydata"></div> -->
+		
+		<!-- links to clear the stored data and to display the data -->
+		<a href="#" id="clear">Clear Stored Data</a>
+		<a href="#" id="display">Display Data</a>
+		<a href="additem.html" id="add" style="display:none;">Add A New Goal</a>
+		
+		<!-- Javascript JSON and main code -->
+		<script type="text/javascript" src="js/json.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>
