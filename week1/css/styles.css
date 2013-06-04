@@ -65,20 +65,20 @@ li {
 	margin-bottom: 1em;
 }
 
-input#goalheadline {
+input#expensesubject {
 	width: 100%;
 }
 
-input#size {
+input#expensehour {
 	width: 100%;
 }
 
-input#savegoal {
+input#saveexpense {
 	font-size: 1em;
 	margin: 10px 0px;
 }
 
-label#labelgoalcomplete {
+label#labelcredit {
 	display: inline;
 	margin-right: 0.5em;
 }
@@ -87,7 +87,7 @@ textarea {
 	width: 100%;
 }
 
-.goallinks {
+.expenselinks {
 	margin-right: 0.5em;
 }
 
@@ -100,7 +100,7 @@ a#clear {
 	margin-right: 0.5em;
 }
 
-ul.goalinfo {
+ul.expenseinfo {
 	margin-bottom: 1em;
 	padding: 0em 1em 1em 1em;
 	border: 1px solid #25282E;

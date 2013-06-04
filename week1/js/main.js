@@ -6,13 +6,13 @@
 window.addEventListener("DOMContentLoaded", function() {
 	
 	// function to create the select field element
-	function makeGoalTypes() {
+	function makeExpenseTypes() {
 		var selectList = document.getElementById("selecttype"), createSelect = document.createElement("select");
 		createSelect.setAttribute("id", "types");
 	
-		for(var i = 0, j = goalTypes.length; i < j; i++) {
+		for(var i = 0, j = expenseTypes.length; i < j; i++) {
 			var createOption = document.createElement("option");
-			var optionText = goalTypes[i];
+			var optionText = expenseTypes[i];
 			createOption.setAttribute("value", optionText);
 			createOption.innerHTML = optionText;
 			createSelect.appendChild(createOption);
@@ -21,18 +21,18 @@ window.addEventListener("DOMContentLoaded", function() {
 	
 	}
 	
-	function getGoalCompleteCheckBoxValue() {
-		if(document.getElementById("goalcomplete").checked) {
-			goalCompleteValue = document.getElementById("goalcomplete").value;
+	function getCreditCheckBoxValue() {
+		if(document.getElementById("credit").checked) {
+			creditValue = document.getElementById("credit").value;
 		} else {
-			goalCompleteValue = "Goal Not Yet Achieved";
+			creditValue = "This Is An Expense";
 		}
 	}
 	
-	function addNewGoal(key) {
+	function addNewExpense(key) {
 	
-	// Check if a key was passed.  A key will come from editGoal.
-	// Saving a new goal will send no key, but create a randomly generated key
+	// Check if a key was passed.  A key will come from editExpense.
+	// Saving a new expense will send no key, but create a randomly generated key
 	if(!key) {
 			// random number generator
 			var uniqueID = Math.floor(Math.random() * 1000001);
@@ -40,36 +40,36 @@ window.addEventListener("DOMContentLoaded", function() {
 		uniqueID = key;
 	}
 		
-		// Find out if Goal Complete checkbox is checked or not
-		getGoalCompleteCheckBoxValue();
+		// Find out if Credit checkbox is checked or not
+		getCreditCheckBoxValue();
 		
 		// Initialize the local variables with the html elements
 		// Create an Object with each property an array that contains the form label and the input value
-		var goalObj 			= {};
-		goalObj.goalHeadline 	= ["Goal:", document.getElementById("goalheadline").value];
-		goalObj.goalType 		= ["Goal Type:", document.getElementById("types").value];
-		goalObj.deadline 		= ["Deadline:", document.getElementById("deadline").value];
-		goalObj.size 			= ["Size:", document.getElementById("size").value];
-		goalObj.details 		= ["Details", document.getElementById("details").value];
-		goalObj.goalcomplete 	= ["Goal Complete:", goalCompleteValue];
+		var expenseObj 			= {};
+		expenseObj.expenseSubject 	= ["Expense:", document.getElementById("expensesubject").value];
+		expenseObj.expenseType 	= ["Expense Type:", document.getElementById("types").value];
+		expenseObj.expenseDate 	= ["Expense Date:", document.getElementById("expensedate").value];
+		expenseObj.expenseHour 	= ["Expense Hour:", document.getElementById("expensehour").value];
+		expenseObj.details 		= ["Details:", document.getElementById("details").value];
+		expenseObj.credit 	= ["Is This A Credit?:", creditValue];
 			
 		// Save the data into local Storage
 		// Use Stringify to convert the object into a string
-		localStorage.setItem(uniqueID, JSON.stringify(goalObj));
-		alert("Goal Saved!");
+		localStorage.setItem(uniqueID, JSON.stringify(expenseObj));
+		alert("Expense Saved!");
 	}
 	
 	function toggleDisplay() {
 		if (flagDisplayData) {
 			flagDisplayData = false;
-			document.getElementById("goalform").style.display = "block";
+			document.getElementById("expenseform").style.display = "block";
 			document.getElementById("clear").style.display = "inline";
 			document.getElementById("display").style.display = "inline";
 			document.getElementById("add").style.display = "none";
-			document.getElementById("goals").style.display = "none";
+			document.getElementById("expenses").style.display = "none";
 		} else {
 			flagDisplayData = true;
-			document.getElementById("goalform").style.display = "none";
+			document.getElementById("expenseform").style.display = "none";
 			document.getElementById("clear").style.display = "inline";
 			document.getElementById("display").style.display = "none";
 			document.getElementById("add").style.display = "inline";
@@ -77,11 +77,11 @@ window.addEventListener("DOMContentLoaded", function() {
 	}
 	
 	// Grab the data from Local Storage and display it on screen
-	function displayGoalsList() {
+	function displayExpensesList() {
 		
 		if (localStorage.length === 0) {
-			alert("There are no goals in Local Storage so default goal data was added.");
-			displayDefaultGoalsList();
+			alert("There are no expenses in Local Storage so default expense data was added.");
+			displayDefaultExpensesList();
 		}
 		
 		// toggle function to display the data
@@ -89,13 +89,13 @@ window.addEventListener("DOMContentLoaded", function() {
 		
 		// Create a div tag IF one has not been created.
 		// If the list has been created, skip this block of code and only display the current list
-		if(document.getElementById("goals") === null) {
-			var createDisplayGoalsDiv = document.createElement("div");
-			createDisplayGoalsDiv.setAttribute("id", "goals");
+		if(document.getElementById("expenses") === null) {
+			var createDisplayExpensesDiv = document.createElement("div");
+			createDisplayExpensesDiv.setAttribute("id", "expenses");
 			var createUList = document.createElement("ul");
-			createDisplayGoalsDiv.appendChild(createUList);
-			document.body.appendChild(createDisplayGoalsDiv);
-			document.getElementById("goals").style.display = "block";
+			createDisplayExpensesDiv.appendChild(createUList);
+			document.body.appendChild(createDisplayExpensesDiv);
+			document.getElementById("expenses").style.display = "block";
 			for (var i = 0, j = localStorage.length; i < j; i++) {
 				var createListItem = document.createElement("li");
 				var createLinksList = document.createElement("li");
@@ -104,43 +104,43 @@ window.addEventListener("DOMContentLoaded", function() {
 				var value = localStorage.getItem(key);
 				
 				// "parse" converts string value from Local Storage back into an object
-				var goalObj = JSON.parse(value);
+				var expenseObj = JSON.parse(value);
 			
 				var createSubUList = document.createElement("ul");
-				createSubUList.setAttribute("class", "goalinfo");
+				createSubUList.setAttribute("class", "expenseinfo");
 				createListItem.appendChild(createSubUList);
 				
-				// Add image thumbnail to goal based on the type
-				getGoalTypeImage(goalObj.goalType[1], createSubUList);
+				// Add image thumbnail to expense based on the type
+				getExpenseTypeImage(expenseObj.expenseType[1], createSubUList);
 				
 				
-				for(var n in goalObj) {
+				for(var n in expenseObj) {
 					var createSubListItem = document.createElement("li");
 					createSubUList.appendChild(createSubListItem);
-					var goalObjText = goalObj[n][0] + " " + goalObj[n][1];
-					createSubListItem.innerHTML = goalObjText;
+					var expenseObjText = expenseObj[n][0] + " " + expenseObj[n][1];
+					createSubListItem.innerHTML = expenseObjText;
 					createSubUList.appendChild(createLinksList);
 				}
 				
-				// calling the function that will create links for each goal
-				createGoalLinks(localStorage.key(i), createLinksList);
+				// calling the function that will create links for each expense
+				createExpenseLinks(localStorage.key(i), createLinksList);
 			}
 		} else {
-			document.getElementById("goals").style.display = "block";
+			document.getElementById("expenses").style.display = "block";
 		}
 	}
 	
-	// function to get the image corresponding to the goal type
-	function getGoalTypeImage(imageName, createSubUList) {
+	// function to get the image corresponding to the expense type
+	function getExpenseTypeImage(imageName, createSubUList) {
 		var imageListItem = document.createElement("li");
 		createSubUList.appendChild(imageListItem);
-		var newGoalTypeImage = document.createElement("img");
-		var setSource = newGoalTypeImage.setAttribute("src", "img/" + imageName + ".png");
-		imageListItem.appendChild(newGoalTypeImage);
+		var newExpenseTypeImage = document.createElement("img");
+		var setSource = newExpenseTypeImage.setAttribute("src", "img/" + imageName + ".png");
+		imageListItem.appendChild(newExpenseTypeImage);
 	}
 	
 	// function to pull JSON data from json.js file and save into Local Storage as default data
-	function displayDefaultGoalsList() {
+	function displayDefaultExpensesList() {
 		for (var n in json) {
 			// random number generator
 			var uniqueID = Math.floor(Math.random() * 1000001);
@@ -149,83 +149,83 @@ window.addEventListener("DOMContentLoaded", function() {
 		}
 	}
 	
-	// Function to create buttons for editing and deleting a goal in the list
-	function createGoalLinks(key, createLinksList) {
+	// Function to create buttons for editing and deleting an expense in the list
+	function createExpenseLinks(key, createLinksList) {
 		
-		// adds edit goal link
-		var editGoalLink = document.createElement("a");
-		editGoalLink.href = "#";
-		editGoalLink.key = key;
-		editGoalLink.setAttribute("class", "goallinks");
-		editGoalText = "Edit Goal";
-		editGoalLink.addEventListener("click", editGoal);
-		editGoalLink.innerHTML = editGoalText;
-		createLinksList.appendChild(editGoalLink);
+		// adds edit expense link
+		var editExpenseLink = document.createElement("a");
+		editExpenseLink.href = "#";
+		editExpenseLink.key = key;
+		editExpenseLink.setAttribute("class", "expenselinks");
+		editExpenseText = "Edit Expense";
+		editExpenseLink.addEventListener("click", editExpense);
+		editExpenseLink.innerHTML = editExpenseText;
+		createLinksList.appendChild(editExpenseLink);
 	
-		// adds delete goal link
-		var deleteGoalLink = document.createElement("a");
-		deleteGoalLink.href = "#";
-		deleteGoalLink.key = key;
-		deleteGoalLink.setAttribute("class", "goallinks");
-		deleteGoalText = "Delete Goal";
-		deleteGoalLink.addEventListener("click", deleteGoal);
-		deleteGoalLink.innerHTML = deleteGoalText;
-		createLinksList.appendChild(deleteGoalLink);
+		// adds delete expense link
+		var deleteExpenseLink = document.createElement("a");
+		deleteExpenseLink.href = "#";
+		deleteExpenseLink.key = key;
+		deleteExpenseLink.setAttribute("class", "expenselinks");
+		deleteExpenseText = "Delete Expense";
+		deleteExpenseLink.addEventListener("click", deleteExpense);
+		deleteExpenseLink.innerHTML = deleteExpenseText;
+		createLinksList.appendChild(deleteExpenseLink);
 	
 	}
 	
-	// function to edit the goal
-	function editGoal() {
+	// function to edit the expense
+	function editExpense() {
 
 	
-		// grab the data from this specific goal from Local Storage
+		// grab the data from this specific expense from Local Storage
 		var value = localStorage.getItem(this.key);
-		var goalObj = JSON.parse(value);
+		var expenseObj = JSON.parse(value);
 		
 		// bring back the form to the display
 		toggleDisplay();
 	
-		// fill in the form with this specific goal data pulled from Local Storage
-		document.getElementById("goalheadline").value = goalObj.goalHeadline[1];
-		document.getElementById("types").value = goalObj.goalType[1];
-		document.getElementById("deadline").value = goalObj.deadline[1];
-		document.getElementById("size").value = goalObj.size[1];
-		document.getElementById("details").value = goalObj.details[1];
-		if (goalObj.goalcomplete[1] === "Goal Achieved") {
-			document.getElementById("goalcomplete").setAttribute("checked", "checked");
+		// fill in the form with this specific expense data pulled from Local Storage
+		document.getElementById("expensesubject").value = expenseObj.expenseSubject[1];
+		document.getElementById("types").value = expenseObj.expenseType[1];
+		document.getElementById("expensedate").value = expenseObj.expenseDate[1];
+		document.getElementById("expensehour").value = expenseObj.expenseHour[1];
+		document.getElementById("details").value = expenseObj.details[1];
+		if (expenseObj.credit[1] === "This Is A Credit") {
+			document.getElementById("credit").setAttribute("checked", "checked");
 		}
 		
-		// Remove the event listener from the "save goal" button
-		saveGoalButton.removeEventListener("click", addNewGoal);
+		// Remove the event listener from the "save expense" button
+		saveExpenseButton.removeEventListener("click", addNewExpense);
 		
-		// Change the "save goal" value to "edit goal"
-		document.getElementById("savegoal").value = "Edit Goal";
-		var editSaveGoal = document.getElementById("savegoal");
+		// Change the "save expense" value to "edit expense"
+		document.getElementById("saveexpense").value = "Edit Expense";
+		var editSaveExpense = document.getElementById("saveexpense");
 		
-		editSaveGoal.addEventListener("click", validate);
-		editSaveGoal.key = this.key;
+		editSaveExpense.addEventListener("click", validate);
+		editSaveExpense.key = this.key;
 	}
 	
-	function deleteGoal() {
-		var ask = confirm("Are you sure you want to delete this goal?");
+	function deleteExpense() {
+		var ask = confirm("Are you sure you want to delete this expense?");
 		if (ask) {
 			localStorage.removeItem(this.key);
-			alert("Goal was deleted.");
+			alert("Expense was deleted.");
 			window.location.reload();
 		} else {
-			alert("Goal was not deleted.");
+			alert("Expense was not deleted.");
 		}
 	
 	
 	
 	}
 	
-	function clearGoalsList() {
+	function clearExpensesList() {
 		if(localStorage.length === 0) {
-			alert("There are no goals to remove.");
+			alert("There are no expenses to remove.");
 		} else {
 			localStorage.clear();
-			alert("All goals are deleted.");
+			alert("All expenses are deleted.");
 			window.location.reload();
 			return false;
 		}
@@ -233,15 +233,15 @@ window.addEventListener("DOMContentLoaded", function() {
 	
 	function validate(eventData) {
 		// elements to check
-		var getGoalHeadline = document.getElementById("goalheadline");
-		var getGoalType = document.getElementById("types");
+		var getExpenseSubject = document.getElementById("expensesubject");
+		var getExpenseType = document.getElementById("types");
 		
 		// Clear any current error messages
 		errorMessages.innerHTML = "";
 		
 		// Reset borders
-		getGoalHeadline.style.border = "1px solid black";
-		getGoalType.style.border = "1px solid black";
+		getExpenseSubject.style.border = "1px solid black";
+		getExpenseType.style.border = "1px solid black";
 
 		
 		
@@ -249,17 +249,17 @@ window.addEventListener("DOMContentLoaded", function() {
 		// error messages
 		var errorMessageArray = [];
 		
-		// goal headline validation
-		if(getGoalHeadline.value === "") {
-			var goalHeadlineError = "Please enter a goal.";
-			getGoalHeadline.style.border = "1px solid red";
-			errorMessageArray.push(goalHeadlineError);
+		// expense subject validation
+		if(getExpenseSubject.value === "") {
+			var expenseSubjectError = "Please enter an expense.";
+			getExpenseSubject.style.border = "1px solid red";
+			errorMessageArray.push(expenseSubjectError);
 		}
 		
-		// goal type validation
-		if(getGoalType.value === "--Choose a Type--") {
-			var typeError = "Please select a goal type.";
-			getGoalType.style.border = "1px solid red";
+		// expense type validation
+		if(getExpenseType.value === "--Choose a Type--") {
+			var typeError = "Please select an expense type.";
+			getExpenseType.style.border = "1px solid red";
 			errorMessageArray.push(typeError);
 		}
 		
@@ -273,26 +273,26 @@ window.addEventListener("DOMContentLoaded", function() {
 			eventData.preventDefault();
 			return false;
 		} else {
-			addNewGoal(this.key);
+			addNewExpense(this.key);
 		}
 	}
 	
-	// array for the goal types
-	var goalTypes = ["--Choose a Type--", "Personal", "Business", "Travel", "Finance", "Education"];
-	var goalCompleteValue = "Goal Not Yet Achieved";
+	// array for the expense types
+	var expenseTypes = ["--Choose a Type--", "Food", "Clothing", "Housing", "Entertainment", "Other"];
+	var creditValue = "This Is An Expense";
 	errorMessages = document.getElementById("errors");
-	makeGoalTypes();
+	makeExpenseTypes();
 	
 	// toggle variable for checking when to hide the form to display the data or vice versa
 	var flagDisplayData = false;
 	
-	var saveGoalButton = document.getElementById("savegoal");
-	saveGoalButton.addEventListener("click", validate);
+	var saveExpenseButton = document.getElementById("saveexpense");
+	saveExpenseButton.addEventListener("click", validate);
 	
 	var displayDataLink = document.getElementById("display");
-	displayDataLink.addEventListener("click", displayGoalsList);
+	displayDataLink.addEventListener("click", displayExpensesList);
 	
 	var clearDataLink = document.getElementById("clear");
-	clearDataLink.addEventListener("click", clearGoalsList);
+	clearDataLink.addEventListener("click", clearExpensesList);
 
 });

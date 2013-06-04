@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!-- Name: Rolando Velasco -->
-<!-- Term: VFW 1303 -->
-<!-- Project Part 4 -->
+<!-- Term: MIU 1306 -->
+<!-- Project Part 1 -->
 
 <html>
 	<head>
 		<!-- Meta tags -->
 		<meta charset="utf-8" />
-		<meta name="description" content="My Goals To-Do List App" />
-		<meta name="keyword" content="html5, mobile development, visual frameworks, goals list" />
+		<meta name="description" content="My Expense Tracker App" />
+		<meta name="keyword" content="html5, mobile development, visual frameworks, expense tracker" />
 		<meta name="robots" content="index, follow" />
 		<meta name="viewport" content="user-scalable=no, width=device-width" />
 		<meta name="HandHeldFriendly" content="True" />
@@ -18,7 +18,7 @@
 		<link href="css/styles.css" rel="stylesheet" />
 		
 		<!-- Title -->
-		<title>My First Web App: Goals To-Do List</title>
+		<title>My First Web App: Expense Tracker</title>
 	</head>
 	
 	<body>
@@ -26,48 +26,48 @@
 		<header>
 			<hgroup>
 				<!-- Name of app -->
-				<h1>Goals To-Do List</h1>
+				<h1>Expense Tracker</h1>
 			</hgroup>
 		</header>
 		
 		<!-- Form -->
-		<form action="#" method="post" id="goalform" >
+		<form action="#" method="post" id="expenseform" >
 		
 			<!-- First, set up the fieldset and legend -->
 			<fieldset>
-				<legend>Add a New Goal</legend>
+				<legend>Add a New Expense</legend>
 				<span id="required">* required field</span>
 				<ul id="errors"></ul>
 				<!-- Display the elements of the form as an unordered list -->
 				<ul>
 					
-					<!-- Text element: Goal Headline -->
-					<li class="addli"><label for="goalheadline">*Goal:</label><input type="text" id="goalheadline" /></li>
+					<!-- Text element: Expense Subject -->
+					<li class="addli"><label for="expensesubject">*Expense:</label><input type="text" id="expensesubject" /></li>
 				
-					<!-- Select combobox: Type of Goal -->
+					<!-- Select combobox: Type of Expense -->
 					<li id="selecttype" class="addli">
-						<label for="goaltype">*Type of Goal:</label>
+						<label for="expensetype">*Type of Expense:</label>
 					</li>
 					
-					<!-- Date element: Goal deadline -->
-					<li class="addli"><label for="deadline">Complete By:</label><input type="date" id="deadline" /></li>
+					<!-- Date element: Expense date -->
+					<li class="addli"><label for="expensedate">Expense Date:</label><input type="date" id="expensedate" /></li>
 					
-					<!-- Range element: Goal importance -->
-					<li class="addli"><label for="size">From 1-10 (1 being the smallest), how big is this goal?</label><input type="range" min="1" max="10" id="size" /></li>
+					<!-- Range element: Hour of Expense -->
+					<li class="addli"><label for="expensehour">In what hour was this expense made? (0-23, 0 is midnight, 23 is 11PM)</label><input type="range" min="0" max="23" id="expensehour" /></li>
 					
-					<!-- Text area element: Notes about the goal -->
+					<!-- Text area element: Notes about the expense -->
 					<li class="addli"><label for="details">Details:</label><textarea id="details"></textarea></li>
 					 
-					<!-- Checkbox element: Goal Completed -->
-					<li><label for="goalcomplete" id="labelgoalcomplete">Goal Achieved:</label><input type="checkbox" value="Goal Achieved" id="goalcomplete" /></li>
+					<!-- Checkbox element: This is a credit -->
+					<li><label for="credit" id="labelcredit">Is This A Credit?:</label><input type="checkbox" value="This Is A Credit" id="credit" /></li>
 				</ul>
 				
 				<!-- Hidden data to submit -->
-				<input type="hidden" value="newgoal" />
+				<input type="hidden" value="newexpense" />
 			</fieldset>
 			
-			<!-- Save the goal -->
-			<input type="submit" value="Save Goal" id="savegoal" />
+			<!-- Save the expense -->
+			<input type="submit" value="Save Expense" id="saveexpense" />
 		</form>
 		
 <!--		<div id="displaydata"></div> -->
@@ -75,7 +75,7 @@
 		<!-- links to clear the stored data and to display the data -->
 		<a href="#" id="clear">Clear Stored Data</a>
 		<a href="#" id="display">Display Data</a>
-		<a href="additem.html" id="add" style="display:none;">Add A New Goal</a>
+		<a href="additem.html" id="add" style="display:none;">Add A New Expense</a>
 		
 		<!-- Javascript JSON and main code -->
 		<script type="text/javascript" src="js/json.js"></script>
