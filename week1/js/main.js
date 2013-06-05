@@ -45,13 +45,14 @@ window.addEventListener("DOMContentLoaded", function() {
 		
 		// Initialize the local variables with the html elements
 		// Create an Object with each property an array that contains the form label and the input value
-		var expenseObj 			= {};
-		expenseObj.expenseSubject 	= ["Expense:", document.getElementById("expensesubject").value];
-		expenseObj.expenseType 	= ["Expense Type:", document.getElementById("types").value];
-		expenseObj.expenseDate 	= ["Expense Date:", document.getElementById("expensedate").value];
-		expenseObj.expenseHour 	= ["Expense Hour:", document.getElementById("expensehour").value];
-		expenseObj.details 		= ["Details:", document.getElementById("details").value];
-		expenseObj.credit 	= ["Is This A Credit?:", creditValue];
+		var expenseObj 					= {};
+		expenseObj.expenseSubject 		= ["Expense:", document.getElementById("expensesubject").value];
+		expenseObj.expenseAmount		= ["Expense Amount:", document.getElementById("expenseamount").value];
+		expenseObj.expenseType 			= ["Expense Type:", document.getElementById("types").value];
+		expenseObj.expenseDate 			= ["Expense Date:", document.getElementById("expensedate").value];
+		expenseObj.expenseImportance 	= ["Expense Importance:", document.getElementById("expenseimportance").value];
+		expenseObj.details 				= ["Details:", document.getElementById("details").value];
+		expenseObj.credit 				= ["Is This A Credit?:", creditValue];
 			
 		// Save the data into local Storage
 		// Use Stringify to convert the object into a string
@@ -187,12 +188,15 @@ window.addEventListener("DOMContentLoaded", function() {
 	
 		// fill in the form with this specific expense data pulled from Local Storage
 		document.getElementById("expensesubject").value = expenseObj.expenseSubject[1];
+		document.getElementById("expenseamount").value = expenseObj.expenseAmount[1];
 		document.getElementById("types").value = expenseObj.expenseType[1];
 		document.getElementById("expensedate").value = expenseObj.expenseDate[1];
-		document.getElementById("expensehour").value = expenseObj.expenseHour[1];
+		document.getElementById("expenseimportance").value = expenseObj.expenseImportance[1];
 		document.getElementById("details").value = expenseObj.details[1];
 		if (expenseObj.credit[1] === "This Is A Credit") {
-			document.getElementById("credit").setAttribute("checked", "checked");
+			document.getElementById("credit").checked = true;
+		} else {
+			document.getElementById("credit").checked = false;
 		}
 		
 		// Remove the event listener from the "save expense" button
@@ -234,6 +238,7 @@ window.addEventListener("DOMContentLoaded", function() {
 	function validate(eventData) {
 		// elements to check
 		var getExpenseSubject = document.getElementById("expensesubject");
+		var getExpenseAmount = document.getElementById("expenseamount");
 		var getExpenseType = document.getElementById("types");
 		
 		// Clear any current error messages
@@ -241,11 +246,9 @@ window.addEventListener("DOMContentLoaded", function() {
 		
 		// Reset borders
 		getExpenseSubject.style.border = "1px solid black";
+		getExpenseAmount.style.border = "1px solid black";
 		getExpenseType.style.border = "1px solid black";
 
-		
-		
-		
 		// error messages
 		var errorMessageArray = [];
 		
@@ -254,6 +257,13 @@ window.addEventListener("DOMContentLoaded", function() {
 			var expenseSubjectError = "Please enter an expense.";
 			getExpenseSubject.style.border = "1px solid red";
 			errorMessageArray.push(expenseSubjectError);
+		}
+
+		// expense amount validation
+		if(getExpenseAmount.value === "") {
+			var expenseAmountError = "Please enter an amount.";
+			getExpenseAmount.style.border = "1px solid red";
+			errorMessageArray.push(expenseAmountError);
 		}
 		
 		// expense type validation

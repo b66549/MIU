@@ -43,7 +43,10 @@
 					
 					<!-- Text element: Expense Subject -->
 					<li class="addli"><label for="expensesubject">*Expense:</label><input type="text" id="expensesubject" /></li>
-				
+					
+					<!-- Text element: Expense Amount -->
+					<li class="addli"><label for="expenseamount">*Amount:</label><input type="text" id="expenseamount" /></li>
+					
 					<!-- Select combobox: Type of Expense -->
 					<li id="selecttype" class="addli">
 						<label for="expensetype">*Type of Expense:</label>
@@ -52,8 +55,8 @@
 					<!-- Date element: Expense date -->
 					<li class="addli"><label for="expensedate">Expense Date:</label><input type="date" id="expensedate" /></li>
 					
-					<!-- Range element: Hour of Expense -->
-					<li class="addli"><label for="expensehour">In what hour was this expense made? (0-23, 0 is midnight, 23 is 11PM)</label><input type="range" min="0" max="23" id="expensehour" /></li>
+					<!-- Range element: Expense importance -->
+					<li class="addli"><label for="expenseimportance">How important is this expense? (1-10, 1 = low importance):</label><input type="range" min="1" max="10" id="expenseimportance" /></li>
 					
 					<!-- Text area element: Notes about the expense -->
 					<li class="addli"><label for="details">Details:</label><textarea id="details"></textarea></li>
